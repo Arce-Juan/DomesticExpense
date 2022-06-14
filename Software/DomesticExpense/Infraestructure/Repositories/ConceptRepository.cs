@@ -15,7 +15,9 @@ namespace DomesticExpense.Infraestructure.Repositories
 
         public List<Concept> GetAll()
         {
-            return _dbContext.Concepts.ToList();
+            return _dbContext.Concepts
+                .OrderBy(x => x.Name)
+                .ToList();
         }
 
         public Concept GetById(int id)
@@ -23,9 +25,12 @@ namespace DomesticExpense.Infraestructure.Repositories
             return _dbContext.Concepts.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Concept GetByName(string name)
+        public List<Concept> GetByName(string name)
         {
-            return _dbContext.Concepts.Where(x => x.Name.Contains(name)).FirstOrDefault();
+            return _dbContext.Concepts
+                .Where(x => x.Name.Contains(name))
+                .OrderBy(x => x.Name)
+                .ToList();
         }
 
         public void Save(Concept concept)

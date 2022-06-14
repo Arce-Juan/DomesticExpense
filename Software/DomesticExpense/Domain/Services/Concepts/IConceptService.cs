@@ -6,7 +6,10 @@ namespace DomesticExpense.Domain.Services.Concepts
     {
         List<Concept> GetAll();
         Concept GetById(int id);
-        Concept GetByName(string name);
+        List<Concept> GetByName(string name);
         List<string> GetAllCategory();
+        void Save(Concept concept);
+        void Update(Concept concept);
+        void Delete(int id);
     }
 }

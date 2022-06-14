@@ -6,6 +6,9 @@ namespace DomesticExpense.Infraestructure.Repositories
     {
         List<Concept> GetAll();
         Concept GetById(int id);
-        Concept GetByName(string name);
+        List<Concept> GetByName(string name);
+        void Save(Concept concept);
+        void Update(Concept concept);
+        void Delete(int id);
     }
 }

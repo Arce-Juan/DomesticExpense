@@ -22,7 +22,7 @@ namespace DomesticExpense.Domain.Services.Concepts
             return _conceptRepository.GetById(id);
         }
 
-        public Concept GetByName(string name)
+        public List<Concept> GetByName(string name)
         {
             return _conceptRepository.GetByName(name);
         }
@@ -35,6 +35,21 @@ namespace DomesticExpense.Domain.Services.Concepts
                 list.Add(item.ToString());
             }
             return list;
+        }
+
+        public void Save(Concept concept)
+        {
+            _conceptRepository.Save(concept);
+        }
+
+        public void Update(Concept concept)
+        {
+            _conceptRepository.Update(concept);
+        }
+
+        public void Delete(int id)
+        {
+            _conceptRepository.Delete(id);
         }
     }
 }
