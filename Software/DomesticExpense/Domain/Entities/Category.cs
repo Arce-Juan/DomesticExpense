@@ -5,8 +5,11 @@
         CREDITOS,
         ESTETICA,
         ENTRETENIMIENTO,
+        GUSTOS,
+        HOGAR,
         IMPUESTO,
         SALUD,
+        OBLIGRACIONES,
         OCIO,
         VIVERES
     }

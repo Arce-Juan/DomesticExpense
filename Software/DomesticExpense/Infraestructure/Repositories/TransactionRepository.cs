@@ -15,12 +15,17 @@ namespace DomesticExpense.Infraestructure.Repositories
 
         public List<Transaction> GetAll()
         {
-            return _dbContext.Transactions.ToList();
+            return _dbContext.Transactions
+                .Include(x => x.Concept)
+                .Where(x => x.TransactionType == TransactionType.EGRESO)
+                .ToList();
         }
 
         public Transaction GetById(int id)
         {
-            return _dbContext.Transactions.Where(x => x.Id == id).FirstOrDefault();
+            return _dbContext.Transactions.Where(x => x.Id == id)
+                .Include(x => x.Concept)
+                .FirstOrDefault();
         }
 
         public void Save(Transaction transaction)
