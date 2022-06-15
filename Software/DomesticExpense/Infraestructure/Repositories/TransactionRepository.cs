@@ -18,6 +18,16 @@ namespace DomesticExpense.Infraestructure.Repositories
             return _dbContext.Transactions
                 .Include(x => x.Concept)
                 .Where(x => x.TransactionType == TransactionType.EGRESO)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+        }
+
+        public List<Transaction> GetAllByToDay()
+        {
+            return _dbContext.Transactions
+                .Include(x => x.Concept)
+                .Where(x => x.TransactionType == TransactionType.EGRESO && x.Date.Date == DateTime.Now.Date)
+                .OrderByDescending(x => x.Date)
                 .ToList();
         }
 
