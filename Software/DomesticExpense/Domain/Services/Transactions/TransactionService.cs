@@ -17,6 +17,18 @@ namespace DomesticExpense.Domain.Services.Transactions
             return _transactionRepository.GetAll();
         }
 
+        public List<Transaction> GetAllByToDay()
+        {
+            return _transactionRepository.GetAllByToDay();
+        }
+
+        public double GetTotalTransactionsToDay()
+        {
+            var transactions = _transactionRepository.GetAll();
+            var sum = transactions.Sum(x => x.Amount);
+            return sum;
+        }
+
         public Transaction GetById(int id)
         {
             return _transactionRepository.GetById(id);

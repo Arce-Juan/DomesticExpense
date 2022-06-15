@@ -19,11 +19,13 @@ namespace DomesticExpense.Controllers
 
         public IActionResult Index()
         {
+            var transaction = _transactionService.GetAllByToDay();
             var _model = new TransactionViewModels()
             {
                 Concepts = _conceptService.GetAll(),
                 TransactionTypes = _transactionService.GetAllTypes(),
-                Transactions = _transactionService.GetAll()
+                Transactions = transaction,
+                TotalTransactions = transaction.Sum(x => x.Amount)
             };
 
             return View(_model);
@@ -35,7 +37,7 @@ namespace DomesticExpense.Controllers
             var transaction = new Transaction()
             {
                 Date = DateTime.Parse(collection["nInputDate"].ToString()),
-                Amount = double.Parse(collection["idInputAmount"].ToString()),
+                Amount = double.Parse(collection["nInputAmount"].ToString()),
                 Concept = _conceptService.GetById(int.Parse(collection["nSelectConcept"].ToString())),
                 TransactionType = TransactionType.EGRESO,
                 PeriodMonth = PeriodMonth.AGOSTO
@@ -44,6 +46,17 @@ namespace DomesticExpense.Controllers
             _transactionService.Save(transaction);
 
             return RedirectToAction("Index", "Transactions", new { filter = "" });
+        }
+
+        public IActionResult Create()
+        {
+            var _model = new CreateTransactionViewModels()
+            {
+                Concepts = _conceptService.GetAll(),
+                TransactionTypes = _transactionService.GetAllTypes(),
+            };
+
+            return View(_model);
         }
     }
 }
