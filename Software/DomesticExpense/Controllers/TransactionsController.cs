@@ -17,15 +17,17 @@ namespace DomesticExpense.Controllers
             _conceptService = conceptService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string filter = "day")
         {
-            var transaction = _transactionService.GetAllByToDay();
+            var transaction = _transactionService.GetAllByToFilter(filter);
+
             var _model = new TransactionViewModels()
             {
                 Concepts = _conceptService.GetAll(),
                 TransactionTypes = _transactionService.GetAllTypes(),
                 Transactions = transaction,
-                TotalTransactions = transaction.Sum(x => x.Amount)
+                TotalTransactions = transaction.Sum(x => x.Amount),
+                filterBy = filter
             };
 
             return View(_model);

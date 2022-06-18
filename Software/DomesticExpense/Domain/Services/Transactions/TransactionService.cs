@@ -17,9 +17,9 @@ namespace DomesticExpense.Domain.Services.Transactions
             return _transactionRepository.GetAll();
         }
 
-        public List<Transaction> GetAllByToDay()
+        public List<Transaction> GetAllByToFilter(string filter)
         {
-            return _transactionRepository.GetAllByToDay();
+            return _transactionRepository.GetAllByToFilter(filter);
         }
 
         public double GetTotalTransactionsToDay()

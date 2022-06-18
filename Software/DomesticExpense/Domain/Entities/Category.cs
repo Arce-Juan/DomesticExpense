@@ -8,6 +8,7 @@
         GUSTOS,
         HOGAR,
         IMPUESTO,
+        INVERSIONES,
         SALUD,
         OBLIGRACIONES,
         OCIO,

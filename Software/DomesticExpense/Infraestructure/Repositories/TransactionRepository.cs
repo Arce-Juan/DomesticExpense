@@ -22,13 +22,22 @@ namespace DomesticExpense.Infraestructure.Repositories
                 .ToList();
         }
 
-        public List<Transaction> GetAllByToDay()
+        public List<Transaction> GetAllByToFilter(string filter)
         {
-            return _dbContext.Transactions
-                .Include(x => x.Concept)
-                .Where(x => x.TransactionType == TransactionType.EGRESO && x.Date.Date == DateTime.Now.Date)
-                .OrderByDescending(x => x.Date)
-                .ToList();
+            if (filter == "day")
+                return _dbContext.Transactions
+                    .Include(x => x.Concept)
+                    .Where(x => x.TransactionType == TransactionType.EGRESO && x.Date.Date == DateTime.Now.Date)
+                    .OrderByDescending(x => x.Date)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
+            else
+                return _dbContext.Transactions
+                    .Include(x => x.Concept)
+                    .Where(x => x.TransactionType == TransactionType.EGRESO && x.Date.Month == DateTime.Now.Month)
+                    .OrderByDescending(x => x.Date)
+                    .OrderByDescending(x => x.Id)
+                    .ToList();
         }
 
         public Transaction GetById(int id)

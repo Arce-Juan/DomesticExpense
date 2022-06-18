@@ -8,7 +8,7 @@ namespace DomesticExpense.Models
         public List<string> TransactionTypes { get; set; }
         public List<Transaction> Transactions { get; set; }
         public double TotalTransactions { get; set; }
-
+        public string filterBy { get; set; }
     }
 
     public class CreateTransactionViewModels
