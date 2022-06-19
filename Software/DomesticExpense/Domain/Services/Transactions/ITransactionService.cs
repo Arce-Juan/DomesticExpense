@@ -5,6 +5,7 @@ namespace DomesticExpense.Domain.Services.Transactions
     public interface ITransactionService
     {
         List<Transaction> GetAll();
+        List<Transaction> GetAllIncome();
         List<Transaction> GetAllByToFilter(string filter);
         Transaction GetById(int id);
         void Save(Transaction transaction);

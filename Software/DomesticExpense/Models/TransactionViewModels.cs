@@ -16,4 +16,12 @@ namespace DomesticExpense.Models
         public List<Concept> Concepts { get; set; }
         public List<string> TransactionTypes { get; set; }
     }
+
+    public class IncomeViewModels
+    {
+        public List<Concept> Concepts { get; set; }
+        public List<string> TransactionTypes { get; set; }
+        public List<Transaction> Transactions { get; set; }
+        public double TotalTransactions { get; set; }
+    }
 }

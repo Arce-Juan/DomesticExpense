@@ -17,7 +17,15 @@ namespace DomesticExpense.Infraestructure.Repositories
         {
             return _dbContext.Transactions
                 .Include(x => x.Concept)
-                .Where(x => x.TransactionType == TransactionType.EGRESO)
+                .OrderByDescending(x => x.Date)
+                .ToList();
+        }
+
+        public List<Transaction> GetAllIncome()
+        {
+            return _dbContext.Transactions
+                .Include(x => x.Concept)
+                .Where(x => x.TransactionType == TransactionType.INGRESO)
                 .OrderByDescending(x => x.Date)
                 .ToList();
         }

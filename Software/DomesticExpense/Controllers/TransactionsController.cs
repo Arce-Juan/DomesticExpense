@@ -42,7 +42,7 @@ namespace DomesticExpense.Controllers
                 Amount = double.Parse(collection["nInputAmount"].ToString()),
                 Concept = _conceptService.GetById(int.Parse(collection["nSelectConcept"].ToString())),
                 TransactionType = TransactionType.EGRESO,
-                PeriodMonth = PeriodMonth.AGOSTO
+                PeriodMonth = (PeriodMonth)DateTime.Now.Month
             };
 
             _transactionService.Save(transaction);
@@ -59,6 +59,37 @@ namespace DomesticExpense.Controllers
             };
 
             return View(_model);
+        }
+
+        public IActionResult Income()
+        {
+            var incomes = _transactionService.GetAllIncome();
+            var _model = new IncomeViewModels()
+            {
+                Concepts = _conceptService.GetAll(),
+                TransactionTypes = _transactionService.GetAllTypes(),
+                Transactions = incomes,
+                TotalTransactions = incomes.Sum(x => x.Amount)
+            };
+
+            return View(_model);
+        }
+
+        [HttpPost]
+        public IActionResult AddIncome(IFormCollection collection)
+        {
+            var transaction = new Transaction()
+            {
+                Date = DateTime.Parse(collection["nInputDate"].ToString()),
+                Amount = double.Parse(collection["nInputAmount"].ToString()),
+                Concept = _conceptService.GetById(int.Parse(collection["nSelectConcept"].ToString())),
+                TransactionType = TransactionType.INGRESO,
+                PeriodMonth = (PeriodMonth)DateTime.Now.Month
+            };
+
+            _transactionService.Save(transaction);
+
+            return RedirectToAction("Income", "Transactions");
         }
     }
 }

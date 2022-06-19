@@ -17,6 +17,11 @@ namespace DomesticExpense.Domain.Services.Transactions
             return _transactionRepository.GetAll();
         }
 
+        public List<Transaction> GetAllIncome()
+        {
+            return _transactionRepository.GetAllIncome();
+        }
+
         public List<Transaction> GetAllByToFilter(string filter)
         {
             return _transactionRepository.GetAllByToFilter(filter);
@@ -56,7 +61,7 @@ namespace DomesticExpense.Domain.Services.Transactions
             {
                 list.Add(item.ToString());
             }
-            return list.OrderByDescending(x => x).ToList();
+            return list.OrderBy(x => x).ToList();
         }
     }
 }

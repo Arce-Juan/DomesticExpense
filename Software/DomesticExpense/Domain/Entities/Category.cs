@@ -14,6 +14,8 @@
         OCIO,
         VIVERES,
         OTROS,
-        TERCEROS
+        TERCEROS,
+        AHORROS,
+        ACREDITACIONES
     }
 }
