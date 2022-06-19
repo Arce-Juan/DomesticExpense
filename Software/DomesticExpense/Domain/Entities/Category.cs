@@ -12,6 +12,8 @@
         SALUD,
         OBLIGRACIONES,
         OCIO,
-        VIVERES
+        VIVERES,
+        OTROS,
+        TERCEROS
     }
 }

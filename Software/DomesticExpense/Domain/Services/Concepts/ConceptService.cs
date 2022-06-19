@@ -34,7 +34,7 @@ namespace DomesticExpense.Domain.Services.Concepts
             {
                 list.Add(item.ToString());
             }
-            return list;
+            return list.OrderByDescending(x => x).ToList();
         }
 
         public void Save(Concept concept)

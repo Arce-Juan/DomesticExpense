@@ -56,7 +56,7 @@ namespace DomesticExpense.Domain.Services.Transactions
             {
                 list.Add(item.ToString());
             }
-            return list;
+            return list.OrderByDescending(x => x).ToList();
         }
     }
 }
